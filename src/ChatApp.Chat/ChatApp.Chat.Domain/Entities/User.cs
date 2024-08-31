@@ -4,6 +4,9 @@ namespace ChatApp.Chat.Domain.Entities;
 
 public class User : Entity
 {
+    private readonly List<ChatParticipant> _participations = new();
+    private readonly List<ChatMessage> _chatMessages = new();
+
     public User(
         Guid id,
         string username,
@@ -21,4 +24,14 @@ public class User : Entity
     public string Email { get; private set; }
     public string Status { get; private set; }
     public string ProfilePicture { get; private set; }
+
+    public IReadOnlyCollection<ChatParticipant> ChatParticipations => _participations;
+    public IReadOnlyCollection<ChatMessage> ChatMessages => _chatMessages;
+
+    public enum UserChatStatus
+    {
+        Offline,
+        Online,
+        Busy
+    }
 }

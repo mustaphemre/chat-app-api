@@ -1,0 +1,3 @@
+dotnet ef migrations add Initial -p ..\ChatApp.Chat.Infrastructure
+
+dotnet ef database update -p ..\ChatApp.Chat.Infrastructure

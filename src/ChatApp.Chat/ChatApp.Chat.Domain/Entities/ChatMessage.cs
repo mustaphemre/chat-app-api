@@ -8,15 +8,15 @@ public class ChatMessage : Entity
         Guid id,
         Guid chatId,
         Guid senderId,
-        string contetnt,
-        DateTime sentUtc,
-        string status
+        string content,
+        DateTime sentUTC,
+        ChatMessageStatus status
         ) : base(id)
     {
         ChatId = chatId;
         SenderId = senderId;
-        Content = contetnt;
-        SentUTC = sentUtc;
+        Content = content;
+        SentUTC = sentUTC;
         Status = status;
     }
 
@@ -24,5 +24,15 @@ public class ChatMessage : Entity
     public Guid SenderId { get; private set; }
     public string Content { get; private set; }
     public DateTime SentUTC { get; private set; }
-    public string Status { get; private set; }
+    public ChatMessageStatus Status { get; private set; }
+
+    public Chat Chat { get; private set; } = null!;
+    public User SenderUser { get; private set; } = null!;
+
+    public enum ChatMessageStatus
+    {
+        Sent,
+        Delivered,
+        Seen
+    }
 }

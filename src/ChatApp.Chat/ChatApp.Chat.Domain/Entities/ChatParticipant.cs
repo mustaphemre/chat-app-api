@@ -8,14 +8,17 @@ public class ChatParticipant : Entity
         Guid id,
         Guid chatId,
         Guid userId,
-        DateTime joinedUtc) : base(id)
+        DateTime joinedUTC) : base(id)
     {
         ChatId = chatId;
         UserId = userId;
-        JoinedUTC = joinedUtc;
+        JoinedUTC = joinedUTC;
     }
 
     public Guid ChatId { get; private set; }
     public Guid UserId { get; private set; }
     public DateTime JoinedUTC { get; private set; }
+
+    public Chat Chat { get; private set; } = null!;
+    public User ChatUser { get; private set; } = null!;
 }

@@ -1,5 +1,18 @@
+using ChatApp.Common;
+using Projects;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Projects.ChatApp_Chat_Api>("chatapp-chat-api");
+// database
+var sql = builder
+    .AddSqlServer(name: ServiceNames.DATABASE.DATABASE_SERVER_NAME, port: 54600)
+    .WithDataVolume();
+var db = sql.AddDatabase(ServiceNames.DATABASE.DATABASE_NAME );
+
+// apis
+builder
+    .AddProject<ChatApp_Chat_Api>("chatapp-chat-api")
+    .WithReference(db)
+    .WithExternalHttpEndpoints();
 
 builder.Build().Run();
