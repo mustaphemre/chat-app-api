@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ChatApp.Chat\ChatApp.Chat.Api\ChatApp.Chat.Api.csproj" />
     <ProjectReference Include="..\ChatApp.Common\ChatApp.Common.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\ChatApp.Worker.DbMigration\ChatApp.Worker.DbMigration.csproj" />
   </ItemGroup>
 
 </Project>

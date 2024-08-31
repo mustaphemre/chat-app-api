@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-ChatApp.Worker.DbMigration-81f8f149-1dfa-4eaa-8741-80f4617d0e18</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="8.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ChatApp.Chat\ChatApp.Chat.Infrastructure\ChatApp.Chat.Infrastructure.csproj" />
+    <ProjectReference Include="..\ChatApp.Common\ChatApp.Common.csproj" />
+    <ProjectReference Include="..\ChatApp.ServiceDefaults\ChatApp.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>

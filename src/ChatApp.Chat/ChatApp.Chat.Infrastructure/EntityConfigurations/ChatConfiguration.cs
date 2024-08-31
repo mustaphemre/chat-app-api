@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ChatApp.Chat.Infrastructer.EntityConfigurations;
+namespace ChatApp.Chat.Infrastructure.EntityConfigurations;
 
 internal class ChatConfiguration : IEntityTypeConfiguration<Domain.Entities.Chat>
 {

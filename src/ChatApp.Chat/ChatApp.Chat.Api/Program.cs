@@ -1,9 +1,9 @@
-using ChatApp.Chat.Infrastructer;
+using ChatApp.Chat.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-builder.AddInfrastructureServices();
+builder.AddChatApiInfrastructureServices();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

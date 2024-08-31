@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ChatApp.Chat.Infrastructer;
+namespace ChatApp.Chat.Infrastructure;
 
 public class ChatDbContext : DbContext
 {

@@ -4,17 +4,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace ChatApp.Chat.Infrastructer;
+namespace ChatApp.Chat.Infrastructure;
 
 public static class Extensions
 {
-    public static IHostApplicationBuilder AddInfrastructureServices(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddChatApiInfrastructureServices(this IHostApplicationBuilder builder)
     {
-        builder.AddSqlServerDbContext<ChatDbContext>(ServiceNames.DATABASE.DATABASE_NAME,
-            s =>
-            {
-                s.ConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            });
+        builder.AddSqlServerDbContext<ChatDbContext>(ServiceNames.DATABASE.DATABASE_NAME);
 
         return builder;
     }
@@ -31,7 +27,6 @@ public static class Extensions
         try
         {
             context.Database.EnsureCreated();
-
         }
         catch (Exception ex)
         {

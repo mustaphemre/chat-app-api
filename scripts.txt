@@ -1,3 +1,5 @@
 dotnet ef migrations add Initial -p ..\ChatApp.Chat.Infrastructure
 
-dotnet ef database update -p ..\ChatApp.Chat.Infrastructure
+dotnet ef migrations remove -f -p ..\ChatApp.Chat.Infrastructure
+
+dotnet ef database update -p ..\ChatApp.Chat.Infrastructure --connection Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=chatapp_db;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False
