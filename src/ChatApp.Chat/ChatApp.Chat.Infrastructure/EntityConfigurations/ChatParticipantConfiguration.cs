@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ChatApp.Chat.Domain.Chat.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ChatApp.Chat.Infrastructure.EntityConfigurations;
 
-internal class ChatParticipantConfiguration : IEntityTypeConfiguration<Domain.Entities.ChatParticipant>
+internal class ChatParticipantConfiguration : IEntityTypeConfiguration<ChatParticipant>
 {
-    public void Configure(EntityTypeBuilder<Domain.Entities.ChatParticipant> builder)
+    public void Configure(EntityTypeBuilder<ChatParticipant> builder)
     {
         builder.ToTable("ChatParticipant");
 

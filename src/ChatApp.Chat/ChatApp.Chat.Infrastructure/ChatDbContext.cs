@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ChatApp.Chat.Domain.Chat.Entities;
+using ChatApp.Chat.Domain.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChatApp.Chat.Infrastructure;
 
@@ -9,10 +11,10 @@ public class ChatDbContext : DbContext
     {
     }
 
-    public DbSet<Domain.Entities.Chat> Chats { get; set; }
-    public DbSet<Domain.Entities.ChatMessage> ChatMessages { get; set; }
-    public DbSet<Domain.Entities.ChatParticipant> ChatParticipants { get; set; }
-    public DbSet<Domain.Entities.User> Users { get; set; }
+    public DbSet<Domain.Chat.Chat> Chats { get; set; }
+    public DbSet<ChatMessage> ChatMessages { get; set; }
+    public DbSet<ChatParticipant> ChatParticipants { get; set; }
+    public DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

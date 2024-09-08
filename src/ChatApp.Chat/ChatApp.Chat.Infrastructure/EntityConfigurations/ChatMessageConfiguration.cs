@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ChatApp.Chat.Domain.Chat.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ChatApp.Chat.Infrastructure.EntityConfigurations;
 
-internal class ChatMessageConfiguration : IEntityTypeConfiguration<Domain.Entities.ChatMessage>
+internal class ChatMessageConfiguration : IEntityTypeConfiguration<ChatMessage>
 {
-    public void Configure(EntityTypeBuilder<Domain.Entities.ChatMessage> builder)
+    public void Configure(EntityTypeBuilder<ChatMessage> builder)
     {
         builder.ToTable("ChatMessage");
 

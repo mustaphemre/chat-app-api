@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ChatApp.Chat.Infrastructure.EntityConfigurations;
 
-internal class ChatConfiguration : IEntityTypeConfiguration<Domain.Entities.Chat>
+internal class ChatConfiguration : IEntityTypeConfiguration<Domain.Chat.Chat>
 {
-    public void Configure(EntityTypeBuilder<Domain.Entities.Chat> builder)
+    public void Configure(EntityTypeBuilder<Domain.Chat.Chat> builder)
     {
         builder.ToTable("Chat");
 
@@ -19,12 +19,12 @@ internal class ChatConfiguration : IEntityTypeConfiguration<Domain.Entities.Chat
 
         builder
             .HasMany(e => e.ChatParticipants)
-            .WithOne(e => e.Chat)
+            .WithOne()
             .HasForeignKey(e => e.ChatId);
 
         builder
             .HasMany(e => e.ChatMessages)
-            .WithOne(e => e.Chat)
+            .WithOne()
             .HasForeignKey(e => e.ChatId);
     }
 }

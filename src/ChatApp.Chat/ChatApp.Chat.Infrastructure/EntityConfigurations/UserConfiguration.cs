@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ChatApp.Chat.Domain.User;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ChatApp.Chat.Infrastructure.EntityConfigurations;
 
-internal class UserConfiguration : IEntityTypeConfiguration<Domain.Entities.User>
+internal class UserConfiguration : IEntityTypeConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<Domain.Entities.User> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("User");
 
@@ -20,12 +21,12 @@ internal class UserConfiguration : IEntityTypeConfiguration<Domain.Entities.User
 
         builder
             .HasMany(e => e.ChatParticipations)
-            .WithOne(e => e.ChatUser)
+            .WithOne()
             .HasForeignKey(e => e.UserId);
 
         builder
             .HasMany(e => e.ChatMessages)
-            .WithOne(e => e.SenderUser)
+            .WithOne()
             .HasForeignKey(e => e.SenderId);
     }
 }
