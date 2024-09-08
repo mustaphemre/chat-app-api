@@ -1,8 +1,9 @@
-﻿using ChatApp.Chat.Domain.Primitives;
+﻿using ChatApp.Chat.Domain.Chat.Entities;
+using ChatApp.Chat.Domain.Common.Primitives;
 
-namespace ChatApp.Chat.Domain.Entities;
+namespace ChatApp.Chat.Domain.User;
 
-public class User : Entity
+public class User : AggregateRoot
 {
     private readonly List<ChatParticipant> _participations = new();
     private readonly List<ChatMessage> _chatMessages = new();

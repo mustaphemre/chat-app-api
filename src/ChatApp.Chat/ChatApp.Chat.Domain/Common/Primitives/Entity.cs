@@ -1,4 +1,4 @@
-﻿namespace ChatApp.Chat.Domain.Primitives;
+﻿namespace ChatApp.Chat.Domain.Common.Primitives;
 
 public abstract class Entity : IEquatable<Entity>
 {

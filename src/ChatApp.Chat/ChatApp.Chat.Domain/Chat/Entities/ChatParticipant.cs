@@ -1,6 +1,6 @@
-﻿using ChatApp.Chat.Domain.Primitives;
+﻿using ChatApp.Chat.Domain.Common.Primitives;
 
-namespace ChatApp.Chat.Domain.Entities;
+namespace ChatApp.Chat.Domain.Chat.Entities;
 
 public class ChatParticipant : Entity
 {
@@ -18,7 +18,4 @@ public class ChatParticipant : Entity
     public Guid ChatId { get; private set; }
     public Guid UserId { get; private set; }
     public DateTime JoinedUTC { get; private set; }
-
-    public Chat Chat { get; private set; } = null!;
-    public User ChatUser { get; private set; } = null!;
 }

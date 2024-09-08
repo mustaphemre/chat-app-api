@@ -1,6 +1,6 @@
-﻿using ChatApp.Chat.Domain.Primitives;
+﻿using ChatApp.Chat.Domain.Common.Primitives;
 
-namespace ChatApp.Chat.Domain.Entities;
+namespace ChatApp.Chat.Domain.Chat.Entities;
 
 public class ChatMessage : Entity
 {
@@ -25,9 +25,6 @@ public class ChatMessage : Entity
     public string Content { get; private set; }
     public DateTime SentUTC { get; private set; }
     public ChatMessageStatus Status { get; private set; }
-
-    public Chat Chat { get; private set; } = null!;
-    public User SenderUser { get; private set; } = null!;
 
     public enum ChatMessageStatus
     {
