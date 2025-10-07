@@ -1,4 +1,6 @@
+using ChatApp.Chat.Application;
 using ChatApp.Chat.Infrastructure;
+using ChatApp.Chat.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,9 +12,15 @@ builder.AddChatApiInfrastructureServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMediatR(opt =>
+{
+    opt.RegisterServicesFromAssembly(ApplicationAssembly.Instance);
+});
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
+app.AddChatsEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -22,6 +30,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
 
 //app.CreateDbIfNotExists();
 

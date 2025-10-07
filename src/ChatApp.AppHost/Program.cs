@@ -18,4 +18,6 @@ builder
 builder.AddProject<ChatApp_Worker_DbMigration>("chatapp-worker-dbmigration")
     .WithReference(db);
 
+builder.AddProject<ChatApp_Users_Api>("chatapp-user-api");
+
 builder.Build().Run();

@@ -22,7 +22,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Common", "src\ChatA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Chat.Infrastructure", "src\ChatApp.Chat\ChatApp.Chat.Infrastructure\ChatApp.Chat.Infrastructure.csproj", "{385A01C4-58F0-4500-B541-FB2973C8FF4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Worker.DbMigration", "src\ChatApp.Worker.DbMigration\ChatApp.Worker.DbMigration.csproj", "{5D4FAD90-EAE9-4D3F-AFA8-87AE218192A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApp.Worker.DbMigration", "src\ChatApp.Worker.DbMigration\ChatApp.Worker.DbMigration.csproj", "{5D4FAD90-EAE9-4D3F-AFA8-87AE218192A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChatApp.Users", "ChatApp.Users", "{DB5B9A69-9ADE-4C36-9734-5AE3F528718B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Users.Api", "src\ChatApp.Users\ChatApp.Users.Api\ChatApp.Users.Api.csproj", "{E9F8BC44-4835-4490-BA68-F32C092A9B64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +70,10 @@ Global
 		{5D4FAD90-EAE9-4D3F-AFA8-87AE218192A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D4FAD90-EAE9-4D3F-AFA8-87AE218192A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D4FAD90-EAE9-4D3F-AFA8-87AE218192A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F8BC44-4835-4490-BA68-F32C092A9B64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F8BC44-4835-4490-BA68-F32C092A9B64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F8BC44-4835-4490-BA68-F32C092A9B64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F8BC44-4835-4490-BA68-F32C092A9B64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +89,8 @@ Global
 		{971358B3-C7C3-46E3-ABA0-B801553BA0AE} = {8B5D6679-2D35-487A-BD8D-0BC903DE415F}
 		{385A01C4-58F0-4500-B541-FB2973C8FF4A} = {9BF1F6DC-C371-4156-886B-8D70D67C70BB}
 		{5D4FAD90-EAE9-4D3F-AFA8-87AE218192A5} = {8B5D6679-2D35-487A-BD8D-0BC903DE415F}
+		{DB5B9A69-9ADE-4C36-9734-5AE3F528718B} = {8B5D6679-2D35-487A-BD8D-0BC903DE415F}
+		{E9F8BC44-4835-4490-BA68-F32C092A9B64} = {DB5B9A69-9ADE-4C36-9734-5AE3F528718B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AAC9ED7E-1D30-46EE-9B08-5EBAB04C3118}
