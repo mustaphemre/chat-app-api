@@ -1,4 +1,5 @@
-﻿using ChatApp.Users.Application.Users;
+﻿using ChatApp.Users.Application.Registration;
+using ChatApp.Users.Application.Users;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 
@@ -13,6 +14,11 @@ public static class UsersEndpoinds
         app.MapGet("/{userId:guid}", (Guid userId, ISender sender) =>
         {
             return sender.Send(new GetUserByIdInput(userId));
+        });
+
+        app.MapPost("/register", (RegisterUserInput input, ISender sender) =>
+        {
+            return sender.Send(input);
         });
 
         return app;
