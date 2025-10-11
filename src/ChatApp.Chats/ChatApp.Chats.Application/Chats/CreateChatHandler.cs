@@ -31,6 +31,8 @@ public class CreateChatHandler : IRequestHandler<CreateChatInput, CreateChatOutp
             DateTime.UtcNow,
             null);
 
+        chat.AddParticipant(creator.UserId);
+
         foreach (var participation in request.ChatParticipations)
         {
             var participant = await GetUserAsync(participation.UserId);
