@@ -1,0 +1,5 @@
+cd src\ChatApp.Chats\ChatApp.Chats.Infrastructure
+dotnet ef migrations add InitialMigration --startup-project ../ChatApp.Chats.Api
+
+cd src\ChatApp.Users\ChatApp.Users.Infrastructure
+dotnet ef migrations add InitialMigration --startup-project ../ChatApp.Users.Api

@@ -1,6 +1,6 @@
-using ChatApp.Chat.Infrastructure;
+using ChatApp.Chats.Infrastructure;
+using ChatApp.Users.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using OpenTelemetry.Trace;
 using System.Diagnostics;
 
 namespace ChatApp.Worker.DbMigration;
@@ -28,22 +28,41 @@ public class Worker : BackgroundService
     {
         using var activity = _activitySource.StartActivity("Migrating database", ActivityKind.Client);
 
+        await MigrateChatDbAsync(activity, stoppingToken);
+        await MigrateUserDbAsync(activity, stoppingToken);
+
+        _hostApplicationLifetime.StopApplication();
+    }
+
+    private async Task MigrateChatDbAsync(Activity? activity, CancellationToken stoppingToken)
+    {
         try
         {
             using var scope = _serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ChatDbContext>();
-
-            var conn = dbContext.Database.GetConnectionString();
-
             await dbContext.Database.MigrateAsync(stoppingToken);
 
         }
         catch (Exception ex)
         {
-            activity?.RecordException(ex);
+            activity?.AddException(ex);
             throw;
         }
+    }
 
-        _hostApplicationLifetime.StopApplication();
+    private async Task MigrateUserDbAsync(Activity? activity, CancellationToken stoppingToken)
+    {
+        try
+        {
+            using var scope = _serviceProvider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<UsersDbContext>();
+            await dbContext.Database.MigrateAsync(stoppingToken);
+
+        }
+        catch (Exception ex)
+        {
+            activity?.AddException(ex);
+            throw;
+        }
     }
 }

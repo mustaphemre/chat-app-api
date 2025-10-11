@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
@@ -18,8 +18,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\ChatApp.Common\ChatApp.Common.csproj" />
 		<ProjectReference Include="..\..\ChatApp.ServiceDefaults\ChatApp.ServiceDefaults.csproj" />
-		<ProjectReference Include="..\ChatApp.Users.Infrastructure\ChatApp.Users.Infrastructure.csproj" />
-		<ProjectReference Include="..\ChatApp.Users.Presentation\ChatApp.Users.Presentation.csproj" />
+		<ProjectReference Include="..\ChatApp.Chats.Infrastructure\ChatApp.Chats.Infrastructure.csproj" />
+		<ProjectReference Include="..\ChatApp.Chats.Presentation\ChatApp.Chats.Presentation.csproj" />
 	</ItemGroup>
 
 </Project>

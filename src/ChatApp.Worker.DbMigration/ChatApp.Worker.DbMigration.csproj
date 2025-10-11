@@ -15,8 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChatApp.Chat\ChatApp.Chat.Infrastructure\ChatApp.Chat.Infrastructure.csproj" />
+    <ProjectReference Include="..\ChatApp.Chats\ChatApp.Chats.Infrastructure\ChatApp.Chats.Infrastructure.csproj" />
     <ProjectReference Include="..\ChatApp.Common\ChatApp.Common.csproj" />
     <ProjectReference Include="..\ChatApp.ServiceDefaults\ChatApp.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\ChatApp.Users\ChatApp.Users.Infrastructure\ChatApp.Users.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

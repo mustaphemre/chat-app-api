@@ -1,11 +1,11 @@
+using ChatApp.Chats.Application;
+using ChatApp.Chats.Infrastructure;
 using ChatApp.Chats.Presentation;
-using ChatApp.Users.Application;
-using ChatApp.Users.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-builder.AddUserApiInfrastructureServices();
+builder.AddChatApiInfrastructureServices();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,7 +20,8 @@ builder.Services.AddMediatR(opt =>
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
-app.AddUsersEndpoints();
+app.AddChatsEndpoints();
+app.AddMessagesEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -30,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+
 
 //app.CreateDbIfNotExists();
 

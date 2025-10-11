@@ -11,12 +11,13 @@ var db = sql.AddDatabase(ServiceNames.DATABASE.DATABASE_NAME);
 
 // apis
 builder
-    .AddProject<ChatApp_Chat_Api>("chatapp-chat-api")
+    .AddProject<ChatApp_Chats_Api>("chatapp-chat-api")
     .WithReference(db)
     .WithExternalHttpEndpoints();
 
 builder.AddProject<ChatApp_Worker_DbMigration>("chatapp-worker-dbmigration")
-    .WithReference(db);
+    .WithReference(db)
+    .WaitFor(db);
 
 builder.AddProject<ChatApp_Users_Api>("chatapp-user-api");
 
