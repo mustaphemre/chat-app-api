@@ -8,11 +8,18 @@
 
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="13.0.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.71.0" />
+		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.5.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ChatApp.Chats.Domain\ChatApp.Chats.Domain.csproj" />
 		<ProjectReference Include="..\ChatApp.Chats.Infrastructure\ChatApp.Chats.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\..\ChatApp.Users\ChatApp.Users.Presentation\Protos\users.proto" GrpcServices="Client" />
 	</ItemGroup>
 
 </Project>

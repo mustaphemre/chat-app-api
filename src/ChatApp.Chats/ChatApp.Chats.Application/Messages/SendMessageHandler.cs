@@ -2,16 +2,22 @@
 using ChatApp.Chats.Domain.Chats.Entities;
 using ChatApp.Chats.Infrastructure;
 using MediatR;
+using static UsersService.Grpc.UsersService;
 
 namespace ChatApp.Chats.Application.Messages;
 
 public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageOutput>
 {
     private readonly ChatDbContext _dbContext;
+    private readonly UsersServiceClient _usersServiceClient;
 
-    public SendMessageHandler(ChatDbContext dbContext)
+    public SendMessageHandler(
+        ChatDbContext dbContext,
+        UsersServiceClient usersServiceClient
+        )
     {
         _dbContext = dbContext;
+        _usersServiceClient = usersServiceClient;
     }
 
     public async Task<SendMessageOutput> Handle(SendMessageInput request, CancellationToken cancellationToken)
@@ -46,12 +52,17 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
         };
     }
 
-    private Task<UserOutput> GetUserAsync(Guid userId) => Task.FromResult(new UserOutput
+    private async Task<UserOutput> GetUserAsync(Guid userId)
     {
-        UserId = Guid.NewGuid(),
-        Username = string.Empty,
-        Email = string.Empty,
-        ProfilePicture = string.Empty,
-        Status = string.Empty
-    });
+        var userDto = await _usersServiceClient.GetUserByIdAsync(new UsersService.Grpc.GetUserByIdRequest { UserId = userId.ToString() });
+
+        return new UserOutput
+        {
+            UserId = Guid.Parse(userDto.UserId),
+            Username = userDto.Username,
+            Email = userDto.Email,
+            ProfilePicture = userDto.ProfilePicture,
+            Status = userDto.Status,
+        };
+    }
 }

@@ -1,17 +1,22 @@
-﻿using ChatEntity = ChatApp.Chats.Domain.Chats;
+﻿using ChatApp.Chats.Application.Models;
 using ChatApp.Chats.Infrastructure;
 using MediatR;
-using ChatApp.Chats.Application.Models;
+using static UsersService.Grpc.UsersService;
+using ChatEntity = ChatApp.Chats.Domain.Chats;
 
 namespace ChatApp.Chats.Application.Chats;
 
 public class CreateChatHandler : IRequestHandler<CreateChatInput, CreateChatOutput>
 {
     private readonly ChatDbContext _dbContext;
+    private readonly UsersServiceClient _usersServiceClient;
 
-    public CreateChatHandler(ChatDbContext dbContext)
+    public CreateChatHandler(
+        ChatDbContext dbContext,
+        UsersServiceClient usersServiceClient)
     {
         _dbContext = dbContext;
+        _usersServiceClient = usersServiceClient;
     }
 
     public async Task<CreateChatOutput> Handle(CreateChatInput request, CancellationToken cancellationToken)
@@ -54,12 +59,17 @@ public class CreateChatHandler : IRequestHandler<CreateChatInput, CreateChatOutp
         };
     }
 
-    private Task<UserOutput> GetUserAsync(Guid userId) => Task.FromResult(new UserOutput
+    private async Task<UserOutput> GetUserAsync(Guid userId)
     {
-        UserId = Guid.NewGuid(),
-        Username = string.Empty,
-        Email = string.Empty,
-        ProfilePicture = string.Empty,
-        Status = string.Empty
-    });
+        var userDto = await _usersServiceClient.GetUserByIdAsync(new UsersService.Grpc.GetUserByIdRequest { UserId = userId.ToString() });
+
+        return new UserOutput
+        {
+            UserId = Guid.Parse(userDto.UserId),
+            Username = userDto.Username,
+            Email = userDto.Email,
+            ProfilePicture = userDto.ProfilePicture,
+            Status = userDto.Status,
+        };
+    }
 }

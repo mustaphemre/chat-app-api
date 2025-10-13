@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 
-namespace ChatApp.Chats.Presentation;
+namespace ChatApp.Chats.Presentation.Endpoints;
 
 public static class MessagesEndpoinds
 {

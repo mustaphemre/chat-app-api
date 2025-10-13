@@ -3,7 +3,7 @@ using ChatApp.Users.Application.Users;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 
-namespace ChatApp.Chats.Presentation;
+namespace ChatApp.Users.Presentation.Endpoints;
 
 public static class UsersEndpoinds
 {

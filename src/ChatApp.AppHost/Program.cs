@@ -10,19 +10,19 @@ var sql = builder
 var db = sql.AddDatabase(ServiceNames.DATABASE.DATABASE_NAME);
 
 // apis
-builder
-    .AddProject<ChatApp_Chats_Api>("chatapp-chat-api")
+var userApi = builder.AddProject<ChatApp_Users_Api>("chatapp-user-api")
     .WithReference(db)
+    .WaitFor(db)
+    .WithExternalHttpEndpoints();
+
+builder.AddProject<ChatApp_Chats_Api>("chatapp-chat-api")
+    .WithReference(db)
+    .WithReference(userApi)
     .WaitFor(db)
     .WithExternalHttpEndpoints();
 
 builder.AddProject<ChatApp_Worker_DbMigration>("chatapp-worker-dbmigration")
     .WithReference(db)
     .WaitFor(db);
-
-builder.AddProject<ChatApp_Users_Api>("chatapp-user-api")
-    .WithReference(db)
-    .WaitFor(db)
-    .WithExternalHttpEndpoints();
 
 builder.Build().Run();

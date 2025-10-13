@@ -14,4 +14,16 @@
 		<ProjectReference Include="..\ChatApp.Users.Application\ChatApp.Users.Application.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="13.0.0" />
+		<PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+		<PackageReference Include="Grpc.Net.ClientFactory" Version="2.71.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.5.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\users.proto" GrpcServices="Server" />
+	</ItemGroup>
+
 </Project>
