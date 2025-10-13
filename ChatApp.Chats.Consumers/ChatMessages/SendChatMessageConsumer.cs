@@ -1,4 +1,5 @@
-﻿using ChatApp.Chats.Domain.EventModels;
+﻿using ChatApp.Chats.Domain;
+using ChatApp.Chats.Domain.EventModels;
 using Confluent.Kafka;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,7 @@ internal class SendChatMessageConsumer : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         using var consumer = new ConsumerBuilder<string, string>(_config).Build();
-        consumer.Subscribe("chats-topic");
+        consumer.Subscribe(Constants.TopicNames.ChatTopic);
 
         while (!stoppingToken.IsCancellationRequested)
         {

@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 builder.AddChatApiInfrastructureServices();
-builder.Services.AddChatApplicationServices();
+builder.AddChatApplicationServices();
 builder.AddChatConsumerServices();
 
 // Add services to the container.
