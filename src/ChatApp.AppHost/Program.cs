@@ -9,6 +9,9 @@ var sql = builder
     .WithDataVolume();
 var db = sql.AddDatabase(ServiceNames.DATABASE.DATABASE_NAME);
 
+var kafka = builder.AddKafka("kafka")
+    .WithKafkaUI();
+
 // apis
 var userApi = builder.AddProject<ChatApp_Users_Api>("chatapp-user-api")
     .WithReference(db)
@@ -18,6 +21,7 @@ var userApi = builder.AddProject<ChatApp_Users_Api>("chatapp-user-api")
 builder.AddProject<ChatApp_Chats_Api>("chatapp-chat-api")
     .WithReference(db)
     .WithReference(userApi)
+    .WithReference(kafka)
     .WaitFor(db)
     .WithExternalHttpEndpoints();
 
