@@ -23,7 +23,14 @@ builder.AddProject<ChatApp_Chats_Api>("chatapp-chat-api")
     .WithReference(userApi)
     .WithReference(kafka)
     .WaitFor(db)
+    .WaitFor(kafka)
     .WithExternalHttpEndpoints();
+
+builder.AddProject<ChatApp_Chats_Worker>("chatapp-chats-worker")
+    .WithReference(kafka)
+    .WithReference(db)
+    .WaitFor(kafka)
+    .WaitFor(db);
 
 builder.AddProject<ChatApp_Worker_DbMigration>("chatapp-worker-dbmigration")
     .WithReference(db)

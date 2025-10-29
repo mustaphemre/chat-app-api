@@ -1,12 +1,10 @@
 ﻿using ChatApp.Chats.Application.IntegrationServices;
 using ChatApp.Chats.Application.IntegrationServices.Dtos;
-using ChatApp.Chats.Domain;
+using ChatApp.Chats.Application.Producers;
 using ChatApp.Chats.Domain.Chats.Entities;
 using ChatApp.Chats.Domain.EventModels;
 using ChatApp.Chats.Infrastructure;
-using Confluent.Kafka;
 using MediatR;
-using System.Text.Json;
 using static UsersService.Grpc.UsersService;
 
 namespace ChatApp.Chats.Application.Messages;
@@ -15,18 +13,18 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
 {
     private readonly ChatDbContext _dbContext;
     private readonly IUsersIntegrationService _usersIntegrationService;
-    private readonly IProducer<string, string> _producer;
+    private readonly ChatMessageProducer _chatMessageProducer;
 
     public SendMessageHandler(
         ChatDbContext dbContext,
         UsersServiceClient usersServiceClient,
         IUsersIntegrationService usersIntegrationService,
-        IProducer<string, string> producer
+        ChatMessageProducer chatMessageProducer
         )
     {
         _dbContext = dbContext;
         _usersIntegrationService = usersIntegrationService;
-        _producer = producer;
+        _chatMessageProducer = chatMessageProducer;
     }
 
     public async Task<SendMessageOutput> Handle(SendMessageInput request, CancellationToken cancellationToken)
@@ -65,7 +63,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
 
     private async Task PushEvent(ChatMessage chatMessage)
     {
-        var evt = new ChatMessageSendEvent
+        var message = new ChatMessageSendEvent
         {
             ChatId = chatMessage.ChatId.ToString(),
             SenderId = chatMessage.SenderId.ToString(),
@@ -73,12 +71,6 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
             SentUTC = chatMessage.SentUTC
         };
 
-        var json = JsonSerializer.Serialize(evt);
-
-        await _producer.ProduceAsync(Constants.TopicNames.ChatTopic, new Message<string, string>
-        {
-            Key = chatMessage.Id.ToString(),
-            Value = json
-        });
+        await _chatMessageProducer.PublishAsync(chatMessage.Id.ToString(), message);
     }
 }

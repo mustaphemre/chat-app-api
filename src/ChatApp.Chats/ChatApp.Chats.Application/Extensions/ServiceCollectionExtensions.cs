@@ -1,4 +1,5 @@
 ﻿using ChatApp.Chats.Application.IntegrationServices;
+using ChatApp.Chats.Application.Producers;
 using Confluent.Kafka;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,7 +28,7 @@ public static class ServiceCollectionExtensions
     private static void AddProducerConfigs(IHostApplicationBuilder builder)
     {
         // Kafka connection (Aspire provides it automatically)
-        var kafkaBootstrap = builder.Configuration["KAFKA:CONNECTIONSTRING"];
+        var kafkaBootstrap = builder.Configuration["ConnectionStrings:kafka"];
 
         builder.Services.AddSingleton(new ProducerConfig
         {
@@ -39,5 +40,7 @@ public static class ServiceCollectionExtensions
             var config = sp.GetRequiredService<ProducerConfig>();
             return new ProducerBuilder<string, string>(config).Build();
         });
+
+        builder.Services.AddSingleton<ChatMessageProducer>();
     }
 }

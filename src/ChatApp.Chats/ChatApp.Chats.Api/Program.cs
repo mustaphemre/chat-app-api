@@ -1,6 +1,5 @@
 using ChatApp.Chats.Application;
 using ChatApp.Chats.Application.Extensions;
-using ChatApp.Chats.Consumers.Extensions;
 using ChatApp.Chats.Infrastructure;
 using ChatApp.Chats.Presentation.Endpoints;
 
@@ -9,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.AddChatApiInfrastructureServices();
 builder.AddChatApplicationServices();
-builder.AddChatConsumerServices();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

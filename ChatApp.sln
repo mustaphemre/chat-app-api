@@ -36,7 +36,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Users.Infrastructur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Users.Presentation", "src\ChatApp.Users\ChatApp.Users.Presentation\ChatApp.Users.Presentation.csproj", "{A8EF95C7-1B3C-3E37-D352-0492B063DD7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Chats.Consumers", "ChatApp.Chats.Consumers\ChatApp.Chats.Consumers.csproj", "{37521511-71CB-40FD-83E3-037593618BE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Chats.Worker", "src\ChatApp.Chats\ChatApp.Chats.Worker\ChatApp.Chats.Worker.csproj", "{F273C1D0-6C38-24D8-A66F-2E34DF812902}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,10 +100,10 @@ Global
 		{A8EF95C7-1B3C-3E37-D352-0492B063DD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8EF95C7-1B3C-3E37-D352-0492B063DD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8EF95C7-1B3C-3E37-D352-0492B063DD7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37521511-71CB-40FD-83E3-037593618BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37521511-71CB-40FD-83E3-037593618BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37521511-71CB-40FD-83E3-037593618BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37521511-71CB-40FD-83E3-037593618BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F273C1D0-6C38-24D8-A66F-2E34DF812902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F273C1D0-6C38-24D8-A66F-2E34DF812902}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F273C1D0-6C38-24D8-A66F-2E34DF812902}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F273C1D0-6C38-24D8-A66F-2E34DF812902}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,7 +125,7 @@ Global
 		{898730F1-13C3-644F-1310-3FF4712357E1} = {DB5B9A69-9ADE-4C36-9734-5AE3F528718B}
 		{A62844B9-3A9D-0C7B-3052-83469C27893D} = {DB5B9A69-9ADE-4C36-9734-5AE3F528718B}
 		{A8EF95C7-1B3C-3E37-D352-0492B063DD7D} = {DB5B9A69-9ADE-4C36-9734-5AE3F528718B}
-		{37521511-71CB-40FD-83E3-037593618BE2} = {9BF1F6DC-C371-4156-886B-8D70D67C70BB}
+		{F273C1D0-6C38-24D8-A66F-2E34DF812902} = {9BF1F6DC-C371-4156-886B-8D70D67C70BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AAC9ED7E-1D30-46EE-9B08-5EBAB04C3118}
