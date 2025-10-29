@@ -5,11 +5,11 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 // database
 var sql = builder
-    .AddSqlServer(name: ServiceNames.DATABASE.DATABASE_SERVER_NAME, port: 54600)
+    .AddSqlServer(name: ServiceNames.DATABASE.DATABASE_SERVER_NAME, port: 55600)
     .WithDataVolume();
 var db = sql.AddDatabase(ServiceNames.DATABASE.DATABASE_NAME);
 
-var kafka = builder.AddKafka("kafka")
+var kafka = builder.AddKafka("kafka", port: 55700)
     .WithKafkaUI();
 
 // apis
