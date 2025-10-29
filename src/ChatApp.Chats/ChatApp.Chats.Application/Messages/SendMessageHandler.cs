@@ -52,7 +52,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
         await _dbContext.ChatMessages.AddAsync(message, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
 
-        await PushEvent(message);
+        await PushEvent(message, cancellationToken);
 
         return new SendMessageOutput
         {
@@ -61,7 +61,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
         };
     }
 
-    private async Task PushEvent(ChatMessage chatMessage)
+    private async Task PushEvent(ChatMessage chatMessage, CancellationToken cancellationToken)
     {
         var message = new ChatMessageSendEvent
         {
@@ -71,6 +71,6 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
             SentUTC = chatMessage.SentUTC
         };
 
-        await _chatMessageProducer.PublishAsync(chatMessage.Id.ToString(), message);
+        await _chatMessageProducer.PublishAsync(chatMessage.Id.ToString(), message, cancellationToken);
     }
 }
