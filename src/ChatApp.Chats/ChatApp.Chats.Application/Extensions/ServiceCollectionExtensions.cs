@@ -1,4 +1,5 @@
-﻿using Confluent.Kafka;
+﻿using ChatApp.Chats.Application.IntegrationServices;
+using Confluent.Kafka;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -10,6 +11,8 @@ public static class ServiceCollectionExtensions
     {
         AddGrpcClients(builder);
         AddProducerConfigs(builder);
+
+        builder.Services.AddTransient<IUsersIntegrationService, UsersIntegrationService>();
     }
 
     private static void AddGrpcClients(IHostApplicationBuilder builder)
