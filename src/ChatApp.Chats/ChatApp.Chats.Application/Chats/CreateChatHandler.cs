@@ -1,7 +1,7 @@
-﻿using ChatApp.Chats.Application.Models;
+﻿using ChatApp.Chats.Application.IntegrationServices;
+using ChatApp.Chats.Application.IntegrationServices.Dtos;
 using ChatApp.Chats.Infrastructure;
 using MediatR;
-using static UsersService.Grpc.UsersService;
 using ChatEntity = ChatApp.Chats.Domain.Chats;
 
 namespace ChatApp.Chats.Application.Chats;
@@ -9,19 +9,19 @@ namespace ChatApp.Chats.Application.Chats;
 public class CreateChatHandler : IRequestHandler<CreateChatInput, CreateChatOutput>
 {
     private readonly ChatDbContext _dbContext;
-    private readonly UsersServiceClient _usersServiceClient;
+    private readonly IUsersIntegrationService _usersIntegrationService;
 
     public CreateChatHandler(
         ChatDbContext dbContext,
-        UsersServiceClient usersServiceClient)
+        IUsersIntegrationService usersIntegrationService)
     {
         _dbContext = dbContext;
-        _usersServiceClient = usersServiceClient;
+        _usersIntegrationService = usersIntegrationService;
     }
 
     public async Task<CreateChatOutput> Handle(CreateChatInput request, CancellationToken cancellationToken)
     {
-        var creator = await GetUserAsync(request.CreatorId);
+        var creator = await _usersIntegrationService.GetUserAsync(new GetUserInput(request.CreatorId), cancellationToken);
         if (creator is null)
         {
             throw new Exception("Creator user not found!");
@@ -40,7 +40,7 @@ public class CreateChatHandler : IRequestHandler<CreateChatInput, CreateChatOutp
 
         foreach (var participation in request.ChatParticipations)
         {
-            var participant = await GetUserAsync(participation.UserId);
+            var participant = await _usersIntegrationService.GetUserAsync(new GetUserInput(participation.UserId), cancellationToken);
             if (participant is null)
             {
                 throw new Exception("Participant user not found!");
@@ -56,20 +56,6 @@ public class CreateChatHandler : IRequestHandler<CreateChatInput, CreateChatOutp
         {
             ChatId = chatId,
             Success = true,
-        };
-    }
-
-    private async Task<UserOutput> GetUserAsync(Guid userId)
-    {
-        var userDto = await _usersServiceClient.GetUserByIdAsync(new UsersService.Grpc.GetUserByIdRequest { UserId = userId.ToString() });
-
-        return new UserOutput
-        {
-            UserId = Guid.Parse(userDto.UserId),
-            Username = userDto.Username,
-            Email = userDto.Email,
-            ProfilePicture = userDto.ProfilePicture,
-            Status = userDto.Status,
         };
     }
 }

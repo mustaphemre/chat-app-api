@@ -1,4 +1,6 @@
-﻿namespace ChatApp.Chats.Application.Models;
+﻿namespace ChatApp.Chats.Application.IntegrationServices.Dtos;
+
+public record GetUserInput(Guid UserId);
 
 public record UserOutput
 {

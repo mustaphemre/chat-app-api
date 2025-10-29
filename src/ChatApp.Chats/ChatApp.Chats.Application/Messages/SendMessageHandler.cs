@@ -1,4 +1,5 @@
-﻿using ChatApp.Chats.Application.Models;
+﻿using ChatApp.Chats.Application.IntegrationServices;
+using ChatApp.Chats.Application.IntegrationServices.Dtos;
 using ChatApp.Chats.Domain;
 using ChatApp.Chats.Domain.Chats.Entities;
 using ChatApp.Chats.Domain.EventModels;
@@ -6,7 +7,6 @@ using ChatApp.Chats.Infrastructure;
 using Confluent.Kafka;
 using MediatR;
 using System.Text.Json;
-using static Confluent.Kafka.ConfigPropertyNames;
 using static UsersService.Grpc.UsersService;
 
 namespace ChatApp.Chats.Application.Messages;
@@ -14,17 +14,18 @@ namespace ChatApp.Chats.Application.Messages;
 public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageOutput>
 {
     private readonly ChatDbContext _dbContext;
-    private readonly UsersServiceClient _usersServiceClient;
+    private readonly IUsersIntegrationService _usersIntegrationService;
     private readonly IProducer<string, string> _producer;
 
     public SendMessageHandler(
         ChatDbContext dbContext,
         UsersServiceClient usersServiceClient,
+        IUsersIntegrationService usersIntegrationService,
         IProducer<string, string> producer
         )
     {
         _dbContext = dbContext;
-        _usersServiceClient = usersServiceClient;
+        _usersIntegrationService = usersIntegrationService;
         _producer = producer;
     }
 
@@ -36,7 +37,7 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
             throw new Exception("Chat not found!");
         }
 
-        var sender = await GetUserAsync(request.SenderId);
+        var sender = await _usersIntegrationService.GetUserAsync(new GetUserInput(request.SenderId), cancellationToken);
         if (sender is null)
         {
             throw new Exception("Sender not found!");
@@ -59,20 +60,6 @@ public class SendMessageHandler : IRequestHandler<SendMessageInput, SendMessageO
         {
             MessageId = message.Id,
             Success = true
-        };
-    }
-
-    private async Task<UserOutput> GetUserAsync(Guid userId)
-    {
-        var userDto = await _usersServiceClient.GetUserByIdAsync(new UsersService.Grpc.GetUserByIdRequest { UserId = userId.ToString() });
-
-        return new UserOutput
-        {
-            UserId = Guid.Parse(userDto.UserId),
-            Username = userDto.Username,
-            Email = userDto.Email,
-            ProfilePicture = userDto.ProfilePicture,
-            Status = userDto.Status,
         };
     }
 
