@@ -8,9 +8,9 @@ public static class MessagesEndpoinds
 {
     public static WebApplication AddMessagesEndpoints(this WebApplication app)
     {
-        app.MapGroup("message");
+        var group = app.MapGroup("message");
 
-        app.MapPost("/send", (SendMessageInput input, ISender sender) =>
+        group.MapPost("/send", (SendMessageInput input, ISender sender) =>
         {
             return sender.Send(input);
         });

@@ -8,9 +8,9 @@ public static class ChatsEndpoinds
 {
     public static WebApplication AddChatsEndpoints(this WebApplication app)
     {
-        app.MapGroup("chat");
+        var group =  app.MapGroup("chat");
 
-        app.MapPost("/create", (CreateChatInput input, ISender sender) =>
+        group.MapPost("/create", (CreateChatInput input, ISender sender) =>
         {
             return sender.Send(input);
         });
