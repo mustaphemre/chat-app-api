@@ -8,7 +8,7 @@ public static class ChatsEndpoinds
 {
     public static WebApplication AddChatsEndpoints(this WebApplication app)
     {
-        var group =  app.MapGroup("chat");
+        var group = app.MapGroup("chat");
 
         group.MapPost("/create", (CreateChatInput input, ISender sender) =>
         {

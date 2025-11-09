@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ChatApp.Users.Application.Users;
+namespace ChatApp.Users.Application.UsersQuery;
 
 public record GetUserByIdInput(Guid UserId) : IRequest<UserOutput>;
 

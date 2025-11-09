@@ -4,7 +4,7 @@ using ChatApp.Users.Presentation.Endpoints;
 using ChatApp.Users.Presentation.GrpcServices;
 
 var builder = WebApplication.CreateBuilder(args);
-    
+
 builder.AddServiceDefaults();
 builder.AddUserApiInfrastructureServices();
 

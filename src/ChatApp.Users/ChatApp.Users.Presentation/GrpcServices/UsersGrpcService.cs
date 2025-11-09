@@ -1,4 +1,4 @@
-﻿using ChatApp.Users.Application.Users;
+﻿using ChatApp.Users.Application.UsersQuery;
 using Grpc.Core;
 using MediatR;
 using UsersService.Grpc;

@@ -1,5 +1,5 @@
 ﻿using ChatApp.Users.Application.Registration;
-using ChatApp.Users.Application.Users;
+using ChatApp.Users.Application.UsersQuery;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 

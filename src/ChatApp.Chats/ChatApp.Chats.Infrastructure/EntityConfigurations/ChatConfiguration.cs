@@ -6,7 +6,7 @@ namespace ChatApp.Chats.Infrastructure.EntityConfigurations;
 internal class ChatConfiguration : IEntityTypeConfiguration<Domain.Chats.Chat>
 {
     public void Configure(EntityTypeBuilder<Domain.Chats.Chat> builder)
-    {   
+    {
         builder.ToTable("Chats");
 
         builder.HasKey(e => e.Id);

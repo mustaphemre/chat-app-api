@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace ChatApp.Users.Application.Users;
+namespace ChatApp.Users.Application.UsersQuery;
 
 internal class GetUserByIdHandler : IRequestHandler<GetUserByIdInput, UserOutput>
 {
